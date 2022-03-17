@@ -8,12 +8,10 @@ using V_StateOnline.Core.Models;
 
 namespace V_StateOnline.DataAccess.Inmemory
 {
-   public class ProductRepository
+    public class ProductRepository
     {
         ObjectCache cache = MemoryCache.Default;
         List<Product> products;
-        
-
         public ProductRepository()
         {
             products = cache["products"] as List<Product>;
@@ -22,47 +20,39 @@ namespace V_StateOnline.DataAccess.Inmemory
                 products = new List<Product>();
             }
         }
-
         public void Commit()
         {
             cache["products"] = products;
 
         }
-
         public void Insert(Product p)
         {
             products.Add(p);
         }
-
         public void Update(Product product)
         {
             Product productToUpdate = products.Find(p => p.Id == product.Id);
-            if(productToUpdate != null)
+            if(productToUpdate !=null)
             {
                 productToUpdate = product;
-
             }
             else
             {
-                throw new Exception("Product not found");
-
+                throw new Exception("Product Not Found!");
             }
-      
         }
         public Product Find(string Id)
         {
             Product product = products.Find(p => p.Id == Id);
             if (product != null)
             {
-                return product;
-
+                return  product;
             }
             else
             {
-                throw new Exception("Product not found");
-
+                throw new Exception("Product Not Found!");
             }
-
+            
         }
         public IQueryable<Product> Collection()
         {
@@ -74,17 +64,10 @@ namespace V_StateOnline.DataAccess.Inmemory
             if (productToDelete != null)
             {
                 products.Remove(productToDelete);
-
             }
             else
             {
-                throw new Exception("Product not found");
-
-            }
-
+                throw new Exception("Product Not Found");
         }
-    }
-    }
-        
     }
 }
