@@ -9,18 +9,19 @@ using System.Web.Mvc;
 using V_StateOnline.Core.Models;
 using V_StateOnline.DataAccess.Inmemory;
 using V_StateOnline.Core.ViewModels;
+using V_StateOnline.Core.Contracts;
 
 namespace V_StateOnline.UI.Controllers
 {
     public class ProductController : Controller
     {
-        ProductRepository context;
-        CategoryRepository productCategories;
+       IRepository <Product> context;
+        IRepository <productCategory> productCategories;
 
-        public ProductController()
+        public ProductController(IRepository<Product> productcontext, IRepository<ProductCategory> categorycontext)
         {
-            context = new ProductRepository();
-            productCategories = new CategoryRepository();
+            context = productcontext();
+            productCategories = categorycontext();
         }
         // GET: Product
         public ActionResult Index()
@@ -32,7 +33,7 @@ namespace V_StateOnline.UI.Controllers
         {
             ProductVM viewModel = new ProductVM();
             viewModel.Product = new Product();
-            viewModel.ProductCategories = productCategories.Collection()
+            viewModel.ProductCategories = productCategories.Collection();
             
             return View(viewModel);
         }
@@ -61,7 +62,11 @@ namespace V_StateOnline.UI.Controllers
             }
             else
             {
-                return View(product);
+                ProductVM viewModel = new ProductVM();
+                viewModel.Product = product;
+                viewModel.ProductCategories = productCategories.Collection();
+                
+                return View(viewModel);
             }
         }
         [HttpPost]

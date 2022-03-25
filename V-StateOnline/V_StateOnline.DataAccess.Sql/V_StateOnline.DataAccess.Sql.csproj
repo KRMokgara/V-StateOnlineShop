@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2B9F0AAE-46EB-4E2D-868B-4935285BEC94}</ProjectGuid>
+    <ProjectGuid>{73B38209-BDE8-4E7C-896E-5AA03DF78A1E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>V_StateOnline.DataAccess.Inmemory</RootNamespace>
-    <AssemblyName>V-StateOnline.DataAccess.Inmemory</AssemblyName>
+    <RootNamespace>V_StateOnline.DataAccess.Sql</RootNamespace>
+    <AssemblyName>V_StateOnline.DataAccess.Sql</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -43,7 +43,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,20 +51,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CategoryRepository.cs" />
-    <Compile Include="InMemoryRepository.cs" />
-    <Compile Include="ProductRepository.cs" />
+    <Compile Include="DataContext.cs" />
+    <Compile Include="Migrations\202203250644270_Initial.cs" />
+    <Compile Include="Migrations\202203250644270_Initial.designer.cs">
+      <DependentUpon>202203250644270_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\V-StateOnline.Core\V-StateOnline.Core.csproj">
-      <Project>{7088a161-57c6-4f1a-8ad6-9ee5f747d8f7}</Project>
-      <Name>V-StateOnline.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\V-StateOnline.Core\V-StateOnline.Core.csproj">
+      <Project>{7088A161-57C6-4F1A-8AD6-9EE5F747D8F7}</Project>
+      <Name>V-StateOnline.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202203250644270_Initial.resx">
+      <DependentUpon>202203250644270_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -15,7 +15,7 @@ namespace V_StateOnline.DataAccess.Inmemory
         public ProductRepository()
         {
             products = cache["products"] as List<Product>;
-            if(products == null)
+            if (products == null)
             {
                 products = new List<Product>();
             }
@@ -32,7 +32,7 @@ namespace V_StateOnline.DataAccess.Inmemory
         public void Update(Product product)
         {
             Product productToUpdate = products.Find(p => p.Id == product.Id);
-            if(productToUpdate !=null)
+            if (productToUpdate != null)
             {
                 productToUpdate = product;
             }
@@ -46,13 +46,13 @@ namespace V_StateOnline.DataAccess.Inmemory
             Product product = products.Find(p => p.Id == Id);
             if (product != null)
             {
-                return  product;
+                return product;
             }
             else
             {
                 throw new Exception("Product Not Found!");
             }
-            
+
         }
         public IQueryable<Product> Collection()
         {
@@ -68,6 +68,8 @@ namespace V_StateOnline.DataAccess.Inmemory
             else
             {
                 throw new Exception("Product Not Found");
+            }
         }
+
     }
 }

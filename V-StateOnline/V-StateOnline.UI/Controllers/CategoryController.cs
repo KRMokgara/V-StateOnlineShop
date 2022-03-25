@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using V_StateOnline.Core.Contracts;
+using V_StateOnline.Core.Models;
 using V_StateOnline.DataAccess.Inmemory;
 
 namespace V_StateOnline.UI.Controllers
 {
     public class CategoryController : Controller
     {
-        CategoryRepository context;
+        IRepository<ProductCategory> context;
 
         public object categoryToDelete { get; private set; }
 
-        public CategoryController()
+        public CategoryController(IRepository<ProductCategory> categorycontext)
         {
-            context = new CategoryRepository();
+            context = categorycontext;
         }
         //Get: Category
         public ActionResult Index()
